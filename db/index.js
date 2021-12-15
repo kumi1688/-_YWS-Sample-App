@@ -50,7 +50,7 @@ async function writeData(param_collection, data) {
   }
 
   sizeDict[param_collection] += 1;
-  console.log(sizeDict[param_collection]);
+  console.log(param_collection, data);
 
   data = { ...data, date: new Date() };
   const ref = collection(db, param_collection);

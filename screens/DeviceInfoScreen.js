@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, StyleSheet, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
+import DB_Controller from "../components/DB_Controller";
 import * as Device from "expo-device";
 
 export default function DeviceInfoScreen() {
@@ -63,19 +71,28 @@ export default function DeviceInfoScreen() {
 
   return (
     data && (
-      <FlatList
-        ItemSeparatorComponent={() => <View style={styles.seperator} />}
-        style={styles.list}
-        data={data}
-        renderItem={getItem}
-      />
+      <SafeAreaView style={styles.container}>
+        <DB_Controller collection="DeviceInfo" data={data} />
+        <View>
+          <FlatList
+            ItemSeparatorComponent={() => <View style={styles.seperator} />}
+            style={styles.list}
+            data={data}
+            renderItem={getItem}
+          />
+        </View>
+      </SafeAreaView>
     )
   );
 }
 
 const styles = StyleSheet.create({
-  list: {
+  container: {
     flex: 1,
+    justifyContent: "center",
+    backgroundColor: "white",
+  },
+  list: {
     backgroundColor: "white",
   },
   itemBox: {
@@ -90,5 +107,17 @@ const styles = StyleSheet.create({
   seperator: {
     backgroundColor: "#e0e0e0",
     height: 3,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "stretch",
+    marginTop: 15,
+  },
+  button: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#d9db35",
+    padding: 10,
   },
 });

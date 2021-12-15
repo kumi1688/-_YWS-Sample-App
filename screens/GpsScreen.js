@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 import * as Location from "expo-location";
-
-import { readData, writeData } from "../db/index";
+import DB_Controller from "../components/DB_Controller";
 
 export default function GpsScreen() {
   const [location, setLocation] = useState(null);
@@ -34,21 +33,7 @@ export default function GpsScreen() {
   return (
     location && (
       <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => writeData("gps", location)}
-          >
-            <Text>DB 쓰기</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => readData("gps")}
-            style={[styles.button, styles.middleButton]}
-          >
-            <Text>DB 읽기</Text>
-          </TouchableOpacity>
-        </View>
-
+        <DB_Controller collection="gps" data={location} />
         <View>
           <Text style={styles.paragraph}>위도: {location.latitude}</Text>
           <Text style={styles.paragraph}>경도: {location.longitude}</Text>

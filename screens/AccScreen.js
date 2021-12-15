@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Accelerometer } from "expo-sensors";
-import { readData, writeData } from "../db/index";
+import DB_Controller from "../components/DB_Controller";
 
 function round(n) {
   if (!n) {
@@ -23,8 +23,8 @@ export default function AccScreen() {
     Accelerometer.setUpdateInterval(1000);
   };
 
+  // 100Hz
   const _fast = () => {
-    // 100Hz
     Accelerometer.setUpdateInterval(10);
   };
 
@@ -56,20 +56,7 @@ export default function AccScreen() {
       <Text style={styles.text}>
         x: {round(x)} y: {round(y)} z: {round(z)}
       </Text>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button1}
-          onPress={() => writeData("Accelerometer", { x, y, z })}
-        >
-          <Text>DB 쓰기</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button1}
-          onPress={() => readData("Accelerometer")}
-        >
-          <Text>DB 읽기</Text>
-        </TouchableOpacity>
-      </View>
+      <DB_Controller collection="Accelerometer" data={data} />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={subscription ? _unsubscribe : _subscribe}
