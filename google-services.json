@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "874745803418",
+    "project_id": "yws-app-d2828",
+    "storage_bucket": "yws-app-d2828.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874745803418:android:4947556d16c6104da3a523",
+        "android_client_info": {
+          "package_name": "com.yws_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874745803418-7o3nimum761ectas55ra7v7q3q0iv3ci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL1Oue79XxoAqvFv2LepF2LECniZmVW2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874745803418-7o3nimum761ectas55ra7v7q3q0iv3ci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

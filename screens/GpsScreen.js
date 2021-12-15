@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Platform, Text, View, StyleSheet } from "react-native";
-import Constants from "expo-constants";
+import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 import * as Location from "expo-location";
+
+import { readData, writeData } from "../db/index";
 
 export default function GpsScreen() {
   const [location, setLocation] = useState(null);
@@ -26,15 +27,32 @@ export default function GpsScreen() {
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
-    console.log(location);
+    // console.log(location);
     text = JSON.stringify(location);
   }
 
   return (
     location && (
       <View style={styles.container}>
-        <Text style={styles.paragraph}>위도: {location.latitude}</Text>
-        <Text style={styles.paragraph}>경도: {location.longitude}</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => writeData("gps", location)}
+          >
+            <Text>DB 쓰기</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => readData("gps")}
+            style={[styles.button, styles.middleButton]}
+          >
+            <Text>DB 읽기</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View>
+          <Text style={styles.paragraph}>위도: {location.latitude}</Text>
+          <Text style={styles.paragraph}>경도: {location.longitude}</Text>
+        </View>
       </View>
     )
   );
@@ -43,10 +61,21 @@ export default function GpsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
-    padding: 20,
     backgroundColor: "white",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "stretch",
+    marginTop: 15,
+    marginBottom: 30,
+  },
+  button: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#d9db35",
+    padding: 10,
   },
   paragraph: {
     fontSize: 18,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Accelerometer } from "expo-sensors";
+import { readData, writeData } from "../db/index";
 
 function round(n) {
   if (!n) {
@@ -17,12 +18,14 @@ export default function AccScreen() {
   });
   const [subscription, setSubscription] = useState(null);
 
+  // 1Hz
   const _slow = () => {
     Accelerometer.setUpdateInterval(1000);
   };
 
   const _fast = () => {
-    Accelerometer.setUpdateInterval(16);
+    // 100Hz
+    Accelerometer.setUpdateInterval(10);
   };
 
   const _subscribe = () => {
@@ -53,6 +56,20 @@ export default function AccScreen() {
       <Text style={styles.text}>
         x: {round(x)} y: {round(y)} z: {round(z)}
       </Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button1}
+          onPress={() => writeData("Accelerometer", { x, y, z })}
+        >
+          <Text>DB 쓰기</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button1}
+          onPress={() => readData("Accelerometer")}
+        >
+          <Text>DB 읽기</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={subscription ? _unsubscribe : _subscribe}
@@ -94,6 +111,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "green",
+    padding: 10,
+  },
+  button1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#d9db35",
     padding: 10,
   },
   middleButton: {
