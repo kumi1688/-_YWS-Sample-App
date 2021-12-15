@@ -9,6 +9,7 @@
 
 
 >UI 컴포넌트 구조도 
+
 1.App.js는 화면전환(Navigation)을 위한 컴포넌트를 포함함. 다른 기능은 일절 없음
 2. RootScreen.js는 3가지 센서 데이터(가속도, GPS, 기기정보) UI 컴포넌트를 전환하기 위한 Navigation Root Node 역할
 3.1 AccScreen.js는 3축 가속도 데이터(X,Y,Z)를 간단한 Text로 표현함 
